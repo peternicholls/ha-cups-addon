@@ -26,11 +26,11 @@ BrowseLocalProtocols all
 DefaultAuthType Basic
 DefaultEncryption IfRequested
 
-# Host header validation
-# {{.hostname}}.local {{.internal}} {{.external}}
-#ServerAlias *
+# Host header validation - needed for HA ingress proxy to work
+ServerAlias {{.hostname}}.local {{.internal}} {{.external}}
+ServerAlias *
 
-#ServerName {{.hostname}}
+ServerName {{.hostname}}
 
 # Web interface setting...
 WebInterface Yes
