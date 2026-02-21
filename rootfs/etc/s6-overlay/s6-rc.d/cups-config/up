@@ -25,7 +25,13 @@ echo "$config" | tempio \
 
 # Set up /data/cups persistent storage on first run, then symlink /etc/cups to it
 if [ ! -L /etc/cups ]; then
-    [ ! -d /data/cups ] && cp -R /etc/cups /data/cups
+    if [ ! -d /data/cups ]; then
+        if ! cp -R /etc/cups /data/cups; then
+            bashio::log.error "Failed to initialize persistent CUPS configuration under /data/cups; aborting."
+            exit 1
+        fi
+    fi
+
     rm -rf /etc/cups
     ln -s /data/cups /etc/cups
 fi
