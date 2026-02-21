@@ -6,8 +6,8 @@ hostname=$(bashio::info.hostname)
 
 # Get all possible hostnames from configuration
 result=$(bashio::api.supervisor GET /core/api/config true || true)
-internal=$(bashio::jq "$result" '.internal_url' | cut -d'/' -f3 | cut -d':' -f1)
-external=$(bashio::jq "$result" '.external_url' | cut -d'/' -f3 | cut -d':' -f1)
+internal=$(bashio::jq "$result" '.internal_url // empty' | cut -d'/' -f3 | cut -d':' -f1)
+external=$(bashio::jq "$result" '.external_url // empty' | cut -d'/' -f3 | cut -d':' -f1)
 
 if [ -z "$internal" ] || [ -z "$external" ]; then
     bashio::log.warning "Could not determine internal/external URLs from HA config; ServerAlias may be incomplete"
