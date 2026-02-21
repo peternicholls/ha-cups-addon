@@ -1,1 +1,1 @@
-/usr/bin/with-contenv bashio /usr/share/cups-config.sh
+/usr/bin/with-contenv /bin/bash /usr/share/cups-config.sh

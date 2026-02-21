@@ -1,4 +1,6 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/with-contenv bash
+# shellcheck source=/dev/null
+source /usr/lib/bashio/bashio.sh
 
 bashio::log.info "Configuring CUPS and Avahi..."
 
