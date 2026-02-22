@@ -3,12 +3,11 @@
 # complete description of this file.
 #
 
-# Log general information in error_log - change "warn" to "debug"
-# for troubleshooting...
-LogLevel warn
+# Log to stdout/stderr so HA captures output
+LogLevel info
 PageLogFormat
-
-# Specifies the maximum size of the log files before they are rotated.  The value "0" disables log rotation.
+AccessLog /dev/stdout
+ErrorLog /dev/stderr
 MaxLogSize 0
 
 # Default error policy for printers
