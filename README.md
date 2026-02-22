@@ -1,4 +1,5 @@
 [![Builder](https://github.com/peternicholls/ha-cups-addon-x86/actions/workflows/builder.yml/badge.svg)](https://github.com/peternicholls/ha-cups-addon-x86/actions/workflows/builder.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/peternicholls/ha-cups-addon-x86)](https://github.com/peternicholls/ha-cups-addon-x86/releases/latest)
 # CUPS Home Assistant Addon (x86 update)
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fpeternicholls%2Fha-cups-addon-x86)
