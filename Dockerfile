@@ -30,21 +30,13 @@ RUN apt-get update \
     samba \
     bash-completion \
     procps \
-    whois \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY rootfs /
 
-# Add user and disable sudo password checking
-RUN useradd \
-    --groups=sudo,lp,lpadmin \
-    --create-home \
-    --home-dir=/home/print \
-    --shell=/bin/bash \
-    --password=$(mkpasswd print) \
-    print \
-    && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
+# Allow sudo group passwordless sudo (admin user is created at runtime by cups-config.sh)
+RUN sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
 EXPOSE 631
 RUN find /etc/s6-overlay/s6-rc.d -type f \( -name 'run' -o -name 'up' \) -print0 | xargs -0 -r chmod a+x \

@@ -4,11 +4,14 @@
 #
 
 # Log to stdout/stderr so HA captures output
-LogLevel info
+LogLevel {{.log_level}}
 PageLogFormat
 AccessLog /dev/stdout
 ErrorLog /dev/stderr
 MaxLogSize 0
+
+# Default paper size
+DefaultPaperSize {{.paper_size}}
 
 # Default error policy for printers
 ErrorPolicy retry-job

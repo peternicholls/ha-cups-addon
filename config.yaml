@@ -1,5 +1,5 @@
 name: CUPS Print Server
-version: "1.0.10"
+version: "1.0.11"
 slug: cups
 description: The CUPS (Common UNIX Printing System) print server package with drivers included and Avahi
 url: https://github.com/peternicholls/ha-cups-addon-x86
@@ -28,3 +28,13 @@ ingress_port: 631
 map:
   - config:rw
   - ssl
+options:
+  admin_user: print
+  admin_password: print
+  cups_log_level: warn
+  default_paper_size: A4
+schema:
+  admin_user: str
+  admin_password: password
+  cups_log_level: list(warn|info|debug)
+  default_paper_size: list(A4|Letter)

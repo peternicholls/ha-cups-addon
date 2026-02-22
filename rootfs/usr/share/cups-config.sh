@@ -6,6 +6,12 @@ bashio::log.info "Configuring CUPS and Avahi..."
 
 hostname=$(bashio::info.hostname)
 
+# Read user-configurable options
+admin_user=$(bashio::config 'admin_user')
+admin_password=$(bashio::config 'admin_password')
+cups_log_level=$(bashio::config 'cups_log_level')
+default_paper_size=$(bashio::config 'default_paper_size')
+
 # Get all possible hostnames from configuration
 result=$(bashio::api.supervisor GET /core/api/config true || true)
 internal=$(bashio::jq "$result" '.internal_url // empty' | cut -d'/' -f3 | cut -d':' -f1)
@@ -17,7 +23,8 @@ fi
 
 # Build template variables
 config=$(jq --arg internal "$internal" --arg external "$external" --arg hostname "$hostname" \
-    '{internal: $internal, external: $external, hostname: $hostname}' \
+    --arg log_level "$cups_log_level" --arg paper_size "$default_paper_size" \
+    '{internal: $internal, external: $external, hostname: $hostname, log_level: $log_level, paper_size: $paper_size}' \
     /data/options.json)
 
 # Render Avahi config before Avahi daemon starts
@@ -42,5 +49,18 @@ fi
 echo "$config" | tempio \
     -template /usr/share/cupsd.conf.tempio \
     -out /etc/cups/cupsd.conf
+
+# Create or update the admin user at runtime
+if ! id "$admin_user" &>/dev/null; then
+    bashio::log.info "Creating CUPS admin user: ${admin_user}"
+    useradd \
+        --groups=sudo,lp,lpadmin \
+        --create-home \
+        --home-dir="/home/${admin_user}" \
+        --shell=/bin/bash \
+        "$admin_user"
+fi
+echo "${admin_user}:${admin_password}" | chpasswd
+bashio::log.info "CUPS admin user '${admin_user}' configured."
 
 bashio::log.info "CUPS configuration completed."

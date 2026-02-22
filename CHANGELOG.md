@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.11] - 2026-02-22
+
+### Added
+- User-configurable addon options:
+  - `admin_user` — CUPS admin username (default: `print`)
+  - `admin_password` — CUPS admin password (default: `print`)
+  - `cups_log_level` — CUPS log verbosity: `warn`, `info`, or `debug` (default: `warn`)
+  - `default_paper_size` — default paper size: `A4` or `Letter` (default: `A4`)
+
+### Changed
+- Admin user is now created at runtime by `cups-config.sh` using the configured `admin_user`/`admin_password` options, replacing the hardcoded build-time `print:print` user
+- Removed the `whois` package from the Dockerfile (no longer needed now that `mkpasswd` is replaced by `chpasswd`)
+
 ## [1.0.10] - 2026-02-22
 
 ### Added
