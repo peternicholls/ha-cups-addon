@@ -22,6 +22,8 @@ RUN apt-get update \
         hplip \
         printer-driver-brlaser \
         cups-pdf \
+        cups-filters \
+        cups-browsed \
         gnupg2 \
         lsb-release \
         nano \

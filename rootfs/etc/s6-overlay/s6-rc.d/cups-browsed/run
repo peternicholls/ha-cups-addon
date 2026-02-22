@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bashio
+
+bashio::log.info "Starting cups-browsed (AirPrint advertisement) from S6"
+
+exec cups-browsed --no-daemon
