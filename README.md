@@ -23,5 +23,8 @@ This has been tested with Home Assistant Core **2023.9**.
 
 # Acknowledgements
 
-cupsd.conf and Dockerfile modified from https://github.com/lemariva/wifi-cups-server
+This project was forked from [niallr/ha-cups-addon](https://github.com/niallr/ha-cups-addon) for x86/amd64 compatibility and refactored for reliability.
+
+The cupsd.conf and Dockerfile were modified from https://github.com/lemariva/wifi-cups-server
+
 Some of the Avahi and D-Bus code is modified from https://github.com/marthoc/docker-homeseer
