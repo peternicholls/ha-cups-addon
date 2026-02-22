@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.12] - 2026-02-22
+
+### Changed
+- Temporarily removed `image` field from config.yaml — addon now builds locally from Dockerfile until ghcr.io package visibility issues are resolved
+
 ## [1.0.11] - 2026-02-22
 
 ### Added
