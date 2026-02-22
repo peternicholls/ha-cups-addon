@@ -24,10 +24,10 @@ BrowseLocalProtocols all
 
 # Default authentication type, when authentication is required...
 DefaultAuthType Basic
-DefaultEncryption IfRequested
+DefaultEncryption Never
 
-# Host header validation - needed for HA ingress proxy to work
-ServerAlias {{.hostname}}.local {{.internal}} {{.external}}
+# Accept any Host header so HA ingress proxy requests are not rejected
+ServerAlias *
 
 ServerName {{.hostname}}
 
