@@ -2,4 +2,4 @@
 
 bashio::log.info "Starting cups-browsed (AirPrint advertisement) from S6"
 
-exec cups-browsed --no-daemon
+exec cups-browsed -d

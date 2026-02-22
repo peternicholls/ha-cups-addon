@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.13] - 2026-02-22
+
+### Fixed
+- cups-browsed run script: replaced unsupported `--no-daemon` flag with `-d` (debug/foreground mode) for cups-filters 1.28.17 compatibility
+
 ## [1.0.12] - 2026-02-22
 
 ### Changed
