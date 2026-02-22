@@ -1,0 +1,47 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [1.0.10] - 2026-02-22
+
+### Added
+- CHANGELOG.md to track releases
+
+## [1.0.9] - 2026-02-22
+
+### Added
+- `cups-browsed` and `cups-filters` packages for automatic AirPrint advertisement via Avahi
+- s6 service for `cups-browsed`, started after `cups-server`
+
+## [1.0.8] - 2026-02-22
+
+### Changed
+- CUPS access and error logs now written to stdout/stderr so they appear in the HA addon log viewer
+
+## [1.0.7] - 2026-02-22
+
+### Added
+- GitHub Actions workflow to build and push multi-arch Docker images to ghcr.io on tag push
+- `image` field in `config.yaml` so Home Assistant can detect and offer updates without reinstall
+- Auto-create GitHub Release with generated release notes on each tag
+- CI build status and release version badges in README
+
+## [1.0.6] - 2026-02-22
+
+### Fixed
+- Blank white screen when opening the web UI via HA ingress
+  - `ServerAlias *` added to accept any Host header from the ingress proxy
+  - `DefaultEncryption Never` to prevent CUPS issuing HTTPS redirects that break ingress
+
+## [1.0.5] - 2026-02-22
+
+### Fixed
+- Removed `ulimit -n 1048576` from all startup scripts (`run.sh`, `avahi-daemon/run`, `cups-server/run`, `dbus-daemon/run`) — the call always failed with "Operation not permitted" in the restricted HA OS container environment and produced log noise on every start
+
+## [1.0.4] - Prior
+
+### Changed
+- Forked from [niallr/ha-cups-addon](https://github.com/niallr/ha-cups-addon) for x86/amd64 compatibility
+- Refactored s6 service scripts and cups-config oneshot for reliability
+- Fixed null URL handling in internal/external URL detection
+- Fixed infinite startup loop and ingress configuration issues
