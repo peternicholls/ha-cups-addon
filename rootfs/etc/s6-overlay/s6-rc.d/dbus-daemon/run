@@ -1,7 +1,5 @@
 #!/usr/bin/with-contenv bashio
 
-ulimit -n 1048576 2>/dev/null || true
-
 bashio::log.info "Starting DBUS daemon from S6"
 
 dbus-daemon --system --nofork

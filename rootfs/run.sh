@@ -1,7 +1,5 @@
 #!/usr/bin/with-contenv bashio
 
-ulimit -n 1048576 2>/dev/null || true
-
 hostname=$(bashio::info.hostname)
 
 # Get all possible hostnames from configuration
