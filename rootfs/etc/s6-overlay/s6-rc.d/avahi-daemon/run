@@ -2,7 +2,13 @@
 
 bashio::log.info "Starting Avahi daemon from S6"
 
+retries=0
 until [ -e /run/dbus/system_bus_socket ]; do
+  if [ "$retries" -ge 30 ]; then
+    bashio::log.error "Timed out waiting for D-Bus socket (/run/dbus/system_bus_socket); aborting."
+    exit 1
+  fi
+  retries=$((retries + 1))
   sleep 1s
 done
 
