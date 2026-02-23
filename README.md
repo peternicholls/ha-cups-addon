@@ -15,7 +15,7 @@ Tested with Home Assistant OS **17.1** and Home Assistant Core **2026.2**.
 ## Features
 
 - **AirPrint support** - Printers are automatically discoverable by iOS and macOS devices via cups-browsed and Avahi mDNS
-- **Web UI** - CUPS administration interface accessible via the Home Assistant sidebar
+- **Web UI** - CUPS administration interface accessible via web browser
 - **Configurable options** - Admin username, password, log level, and default paper size are all configurable from the addon settings
 - **USB printer support** - Connect USB printers to the host before starting the addon
 - **Driver packages** - Includes HP (HPLIP), Brother, Gutenprint, and other common printer drivers via cups-filters
