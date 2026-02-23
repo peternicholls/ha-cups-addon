@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.7] - 2026-02-23
+
+### Fixed
+- nginx now binds to `0.0.0.0:8099` again — the Supervisor connects from its own container, not localhost, so `127.0.0.1` binding prevented ingress from reaching the landing page
+
 ## [1.1.6] - 2026-02-23
 
 ### Fixed
