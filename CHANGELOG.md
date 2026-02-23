@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.6] - 2026-02-23
+
+### Fixed
+- CI workflow now triggers on `v`-prefixed tags (e.g. `v1.1.6`), fixing missing GitHub Releases and release badge
+
 ## [1.1.5] - 2026-02-23
 
 ### Fixed
