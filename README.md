@@ -48,6 +48,17 @@ It is recommended to change the default admin password before exposing the addon
 - The **CUPS web UI** is accessible directly at `http://homeassistant.local:631` (or your HA host's IP). You must be on the same local network as your Home Assistant instance.
 - AirPrint discovery relies on the addon being on the same network segment as your devices (host networking is enabled).
 
+## Development
+
+### s6-overlay script conventions
+
+All executable scripts under `rootfs/etc/s6-overlay/s6-rc.d/` must follow two rules:
+
+1. **Shebang**: use `#!/usr/bin/with-contenv bashio`. This injects the container environment variables (stored by s6 in `/var/run/s6/container_environment/`) into the process before execution. `#!/usr/bin/env bashio` does **not** do this.
+2. **`exec` for longruns**: `run` scripts for `longrun` services must call their daemon with `exec` as the final command (e.g. `exec cupsd -f`). This replaces the bash process in-place so s6-supervise is attached to the daemon directly, ensuring correct signal delivery and restart behaviour.
+
+Oneshot `up` files may use either a shebang script or a raw command (no shebang); both are valid s6-rc formats.
+
 ## Acknowledgements
 
 This project was forked from [niallr/ha-cups-addon](https://github.com/niallr/ha-cups-addon) and significantly extended.

@@ -15,5 +15,5 @@ until [ -e /var/run/avahi-daemon/socket ]; do
   sleep "${WAIT_INTERVAL}s"
 done
 
-cupsd -f
+exec cupsd -f
 
