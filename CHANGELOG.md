@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.8] - 2026-02-23
+
+### Fixed
+- "Open Addon Settings" link now uses the correct HA URL path (`/config/app/{slug}/config`) and the full addon slug including repository hash prefix (e.g. `ad135c38_cups`) read from the Supervisor API at startup
+
 ## [1.1.7] - 2026-02-23
 
 ### Fixed

@@ -68,4 +68,5 @@ bashio::log.info "CUPS configuration completed."
 # Write version metadata for the ingress landing page
 self_info=$(bashio::api.supervisor GET /addons/self/info true || true)
 addon_version=$(bashio::jq "$self_info" '.data.version // "unknown"')
-echo "{\"version\":\"${addon_version}\"}" > /var/www/ingress/version.json
+addon_slug=$(bashio::jq "$self_info" '.data.slug // "cups"')
+echo "{\"version\":\"${addon_version}\",\"slug\":\"${addon_slug}\"}" > /var/www/ingress/version.json

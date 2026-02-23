@@ -306,7 +306,6 @@
   <script>
     (function () {
       var cupsUrl = 'http://' + window.location.hostname + ':631';
-      var settingsUrl = window.location.origin + '/hassio/addon/cups/config';
 
       var cupsLink       = document.getElementById('cups-link');
       var cupsDirectLink = document.getElementById('cups-direct-link');
@@ -317,10 +316,10 @@
       if (cupsLink)       cupsLink.href        = cupsUrl;
       if (cupsDirectLink) cupsDirectLink.href  = cupsUrl;
       if (urlDisplay)     urlDisplay.textContent = cupsUrl;
-      if (settingsLink)   settingsLink.href    = settingsUrl;
 
       fetch('version.json').then(function (r) { return r.json(); }).then(function (d) {
         if (versionText && d.version) versionText.textContent = 'v' + d.version;
+        if (settingsLink && d.slug) settingsLink.href = window.location.origin + '/config/app/' + d.slug + '/config';
       }).catch(function () {});
     })();
   </script>
