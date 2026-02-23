@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2026-02-23
+
+### Added
+- Ingress landing page served by nginx on port 8099, replacing the broken direct CUPS proxy via HA sidebar
+  - Displays a link to open the CUPS web interface at `http://[ha-host]:631` (built dynamically in the browser)
+  - Button to open the addon settings page in Home Assistant directly
+  - Explains why the ingress page exists (CUPS auth/redirect incompatibility with HA ingress proxy)
+  - Links to CUPS documentation and the addon GitHub repository
+  - Shows the addon version in the footer
+- `nginx` added as a runtime dependency for serving the ingress page
+- New `ingress-server` s6 service (longrun), started after `cups-config` completes
+
+### Changed
+- `ingress_port` changed from `631` to `8099` — CUPS remains accessible directly on port 631 from the local network; the HA sidebar now shows the landing page instead of proxying CUPS directly
+- Ingress landing page HTML is generated at startup by `cups-config.sh` via `tempio`, so the version and addon slug are always current
+
 ## [1.0.13] - 2026-02-22
 
 ### Fixed

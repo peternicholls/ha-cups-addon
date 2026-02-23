@@ -24,6 +24,7 @@ RUN apt-get update \
     cups-pdf \
     cups-filters \
     cups-browsed \
+    nginx \
     gnupg2 \
     lsb-release \
     nano \

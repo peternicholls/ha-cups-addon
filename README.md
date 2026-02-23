@@ -15,7 +15,7 @@ Tested with Home Assistant OS **17.1** and Home Assistant Core **2026.2**.
 ## Features
 
 - **AirPrint support** - Printers are automatically discoverable by iOS and macOS devices via cups-browsed and Avahi mDNS
-- **Web UI** - CUPS administration interface accessible via web browser
+- **Sidebar landing page** - Clicking the addon in the HA sidebar shows a purpose-built page with a direct link to the CUPS web UI, a shortcut to addon settings, and useful documentation links
 - **Configurable options** - Admin username, password, log level, and default paper size are all configurable from the addon settings
 - **USB printer support** - Connect USB printers to the host before starting the addon
 - **Driver packages** - Includes HP (HPLIP), Brother, Gutenprint, and other common printer drivers via cups-filters
@@ -44,7 +44,8 @@ It is recommended to change the default admin password before exposing the addon
 ## Notes
 
 - **USB printers** should be connected to the host before starting the addon. Reconnecting during runtime requires an addon restart.
-- The CUPS web UI is accessible at `http://homeassistant.local:631` or via the HA sidebar. The sidebar uses HA ingress which works best with HTTP (SSL is disabled by default to prevent 502 errors).
+- The **HA sidebar** shows a landing page rather than the CUPS interface directly — this is intentional. CUPS's authentication and redirect behaviour is not compatible with HA's ingress proxy, so the landing page provides a one-click link to open CUPS at `http://[your-ha-host]:631` instead.
+- The **CUPS web UI** is accessible directly at `http://homeassistant.local:631` (or your HA host's IP). You must be on the same local network as your Home Assistant instance.
 - AirPrint discovery relies on the addon being on the same network segment as your devices (host networking is enabled).
 
 ## Acknowledgements

@@ -64,3 +64,19 @@ echo "${admin_user}:${admin_password}" | chpasswd
 bashio::log.info "CUPS admin user '${admin_user}' configured."
 
 bashio::log.info "CUPS configuration completed."
+
+# Generate ingress landing page
+bashio::log.info "Generating ingress landing page..."
+mkdir -p /var/www/ingress
+
+self_info=$(bashio::api.supervisor GET /addons/self/info true || true)
+addon_version=$(bashio::jq "$self_info" '.data.version // "unknown"')
+addon_slug=$(bashio::jq "$self_info" '.data.slug // "cups"')
+
+jq -n --arg version "$addon_version" --arg slug "$addon_slug" \
+    '{version: $version, slug: $slug}' \
+    | tempio \
+        -template /usr/share/ingress-page.tempio \
+        -out /var/www/ingress/index.html
+
+bashio::log.info "Ingress landing page generated."
