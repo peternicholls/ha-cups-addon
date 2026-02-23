@@ -1,5 +1,14 @@
 #!/usr/bin/with-contenv bash
 # shellcheck source=/dev/null
+#
+# CANONICAL STARTUP SCRIPT
+# This script is the single source of truth for CUPS/Avahi configuration.
+# It is invoked by the cups-config s6 oneshot service (s6-rc.d/cups-config/up)
+# during normal addon startup via s6-overlay.
+#
+# run.sh delegates to this script to avoid logic drift.
+# Any startup config changes should be made here, not in run.sh.
+#
 source /usr/lib/bashio/bashio.sh
 
 bashio::log.info "Configuring CUPS and Avahi..."
