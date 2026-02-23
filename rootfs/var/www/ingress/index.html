@@ -299,24 +299,29 @@
       </ul>
     </div>
 
-    <footer>CUPS Print Server &bull; v{{.version}}</footer>
+    <footer>CUPS Print Server &bull; <span id="version-text"></span></footer>
 
   </div>
 
   <script>
     (function () {
       var cupsUrl = 'http://' + window.location.hostname + ':631';
-      var settingsUrl = window.location.origin + '/hassio/addon/{{.slug}}/config';
+      var settingsUrl = window.location.origin + '/hassio/addon/cups/config';
 
       var cupsLink       = document.getElementById('cups-link');
       var cupsDirectLink = document.getElementById('cups-direct-link');
       var urlDisplay     = document.getElementById('cups-url-display');
       var settingsLink   = document.getElementById('settings-link');
+      var versionText    = document.getElementById('version-text');
 
       if (cupsLink)       cupsLink.href        = cupsUrl;
       if (cupsDirectLink) cupsDirectLink.href  = cupsUrl;
       if (urlDisplay)     urlDisplay.textContent = cupsUrl;
       if (settingsLink)   settingsLink.href    = settingsUrl;
+
+      fetch('version.json').then(function (r) { return r.json(); }).then(function (d) {
+        if (versionText && d.version) versionText.textContent = 'v' + d.version;
+      }).catch(function () {});
     })();
   </script>
 </body>

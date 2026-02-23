@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.5] - 2026-02-23
+
+### Fixed
+- Landing page is now a static file baked into the image — nginx starts immediately, fixing "app not ready" dialog on addon start
+- Removed `cups-config` dependency from ingress-server service; version loaded asynchronously via JS
+
 ## [1.1.4] - 2026-02-23
 
 ### Fixed
