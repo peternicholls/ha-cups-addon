@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+- CUPS web interface now accessible without authentication from the local network
+  - Changed `<Location />` and `<Location /admin>` from `Allow @LOCAL` to `Allow all` to fix 401 Unauthorized errors when accessing CUPS via hostname
+  - Admin operations (printer management, configuration) still require authentication
+  - Suitable for home network use where trusted local access is expected
+
 ## [1.1.0] - 2026-02-23
 
 ### Added
