@@ -32,7 +32,9 @@ RUN apt-get update \
     bash-completion \
     procps \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /etc/nginx/sites-enabled /etc/nginx/sites-available \
+    && rm -f /etc/nginx/conf.d/*.conf
 
 COPY rootfs /
 

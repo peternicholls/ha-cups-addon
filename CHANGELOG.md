@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2026-02-23
+
+### Fixed
+- nginx ingress server no longer interferes with other HA addon UIs (e.g. Terminal showing 401)
+  - nginx now binds to `127.0.0.1:8099` only instead of `0.0.0.0:8099`, preventing it from occupying ports on all host interfaces
+  - Debian's default nginx site configs (`sites-enabled/default`, `sites-available/`) removed at build time to ensure no stray port 80 listener is created when running with host networking
+
 ## [1.1.1] - 2026-02-23
 
 ### Fixed
