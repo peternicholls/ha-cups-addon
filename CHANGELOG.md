@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.3] - 2026-02-23
+
+### Fixed
+- Reduced nginx CPU usage from ~25% to near-zero by disabling access logging (`access_log off`); HA's ingress health-check polling was generating constant stdout I/O
+- Reduced `worker_connections` from 256 to 64 and `keepalive_timeout` from 30s to 5s for a single-page server
+- Added `worker_rlimit_nofile 128` and `accept_mutex on` for minimal resource usage
+
 ## [1.1.2] - 2026-02-23
 
 ### Fixed
