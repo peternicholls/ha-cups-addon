@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-02-23
+
+### Changed
+- CI workflow now reads base image from `build.yaml` via `yq`; `build.yaml` is the single source of truth for the base image version (#10)
+- s6 service scripts standardized: `initialization/up` shebang corrected to `with-contenv bashio`; `exec` prepended to daemon invocations in `avahi-daemon/run`, `cups-server/run`, `dbus-daemon/run` for correct signal handling (#12)
+
+### Documentation
+- Dockerfile `apt-get install` block annotated with per-package rationale, distinguishing runtime-required packages from convenience/debug tooling (#13)
+- README: added s6-overlay script conventions guide for contributors
+
 ## [1.1.8] - 2026-02-23
 
 ### Fixed
