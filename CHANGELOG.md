@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.4] - 2026-02-23
+
+### Fixed
+- "Open Addon Settings" button now navigates the parent HA window instead of loading inside the ingress iframe, fixing the double sidebar issue
+
 ## [1.1.3] - 2026-02-23
 
 ### Fixed
