@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv bashio
+set -euo pipefail
 #
 # BACKWARD-COMPAT ENTRYPOINT
 # This script is retained for use cases where s6-overlay is not the process

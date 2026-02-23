@@ -10,6 +10,7 @@
 # Any startup config changes should be made here, not in run.sh.
 #
 source /usr/lib/bashio/bashio.sh
+set -euo pipefail
 
 bashio::log.info "Configuring CUPS and Avahi..."
 
@@ -23,8 +24,8 @@ default_paper_size=$(bashio::config 'default_paper_size')
 
 # Get all possible hostnames from configuration
 result=$(bashio::api.supervisor GET /core/api/config true || true)
-internal=$(bashio::jq "$result" '.internal_url // empty' | cut -d'/' -f3 | cut -d':' -f1)
-external=$(bashio::jq "$result" '.external_url // empty' | cut -d'/' -f3 | cut -d':' -f1)
+internal=$(bashio::jq "$result" '.internal_url // empty' | cut -d'/' -f3 | cut -d':' -f1 || true)
+external=$(bashio::jq "$result" '.external_url // empty' | cut -d'/' -f3 | cut -d':' -f1 || true)
 
 if [ -z "$internal" ] || [ -z "$external" ]; then
     bashio::log.warning "Could not determine internal/external URLs from HA config; ServerAlias may be incomplete"
@@ -76,6 +77,6 @@ bashio::log.info "CUPS configuration completed."
 
 # Write version metadata for the ingress landing page
 self_info=$(bashio::api.supervisor GET /addons/self/info true || true)
-addon_version=$(bashio::jq "$self_info" '.data.version // "unknown"')
-addon_slug=$(bashio::jq "$self_info" '.data.slug // "cups"')
+addon_version=$(bashio::jq "$self_info" '.data.version // "unknown"' || true)
+addon_slug=$(bashio::jq "$self_info" '.data.slug // "cups"' || true)
 echo "{\"version\":\"${addon_version}\",\"slug\":\"${addon_slug}\"}" > /var/www/ingress/version.json
