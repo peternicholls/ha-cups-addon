@@ -41,6 +41,7 @@ COPY rootfs /
 # Allow sudo group passwordless sudo (admin user is created at runtime by cups-config.sh)
 RUN sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
+# CUPS default port — matches config.yaml ports and cupsd.conf.tempio
 EXPOSE 631
 RUN find /etc/s6-overlay/s6-rc.d -type f \( -name 'run' -o -name 'up' \) -print0 | xargs -0 -r chmod a+x \
     && chmod a+x /usr/share/cups-config.sh
