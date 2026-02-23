@@ -59,12 +59,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Read base image from build.yaml
+        id: build-config
+        run: |
+          BUILD_FROM=$(yq '.build_from.${{ matrix.arch }}' build.yaml)
+          echo "build_from=$BUILD_FROM" >> "$GITHUB_OUTPUT"
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           platforms: ${{ matrix.platform }}
-          build-args: BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.1.0
+          build-args: BUILD_FROM=${{ steps.build-config.outputs.build_from }}
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/ha-cups-addon-${{ matrix.arch }}:${{ github.ref_name }}
