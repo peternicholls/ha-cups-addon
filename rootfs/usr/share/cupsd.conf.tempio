@@ -17,6 +17,7 @@ DefaultPaperSize {{.paper_size}}
 ErrorPolicy retry-job
 
 # Only listen for connections from the local machine.
+# Port must match EXPOSE in Dockerfile and ports in config.yaml
 Port 631
 Listen /run/cups/cups.sock
 

@@ -20,14 +20,16 @@ set -euo pipefail
 touch /var/run/avahi_configured
 
 # Wait for Avahi daemon socket (cups-server/run does this in s6 path)
+WAIT_MAX_RETRIES=30
+WAIT_INTERVAL=1
 retries=0
 until [ -e /var/run/avahi-daemon/socket ]; do
-  if [ "$retries" -ge 30 ]; then
+  if [ "$retries" -ge "$WAIT_MAX_RETRIES" ]; then
     bashio::log.error "Timed out waiting for Avahi socket (/var/run/avahi-daemon/socket); aborting."
     exit 1
   fi
   retries=$((retries + 1))
-  sleep 1s
+  sleep "${WAIT_INTERVAL}s"
 done
 
 bashio::log.info "Starting CUPS server..."
